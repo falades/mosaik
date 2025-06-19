@@ -54,9 +54,9 @@ pub fn SettingsPopup(
 
 #[component]
 fn ApiKeysSection() -> Element {
-    let mut openai_key = use_signal(String::new);
     let mut anthropic_key = use_signal (String::new);
-    let mut google_key = use_signal(String::new);
+    // let mut openai_key = use_signal(String::new);
+    // let mut google_key = use_signal(String::new);
     let mut save_status = use_signal(String::new);
     
     // Check if keys exist without loading their values
@@ -81,21 +81,21 @@ fn ApiKeysSection() -> Element {
         };
     
         let mut errors = Vec::new();
-        if !openai_key().is_empty() {
-            if let Err(e) = key_manager.save_openai_key(&openai_key()) {
-                errors.push(format!("OpenAI: {}", e));
-            }
-        }
         if !anthropic_key().is_empty() {
             if let Err(e) = key_manager.save_anthropic_key(&anthropic_key()) {
                 errors.push(format!("Anthropic: {}", e));
             }
         }
-        if !google_key().is_empty() {
-            if let Err(e) = key_manager.save_google_key(&google_key()) {
-                errors.push(format!("Google: {}", e));
-            }
-        }
+        // if !openai_key().is_empty() {
+        //     if let Err(e) = key_manager.save_openai_key(&openai_key()) {
+        //         errors.push(format!("OpenAI: {}", e));
+        //     }
+        // }
+        // if !google_key().is_empty() {
+        //     if let Err(e) = key_manager.save_google_key(&google_key()) {
+        //         errors.push(format!("Google: {}", e));
+        //     }
+        // }
         if errors.is_empty() {
             save_status.set("API keys saved successfully!".to_string());
         } else {
@@ -107,42 +107,42 @@ fn ApiKeysSection() -> Element {
         div {
             style: "flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 20px;",
             
-            div {
-                style: "display: flex; flex-direction: column; gap: 12px;",
+        //     div {
+        //         style: "display: flex; flex-direction: column; gap: 12px;",
                 
-                h4 {
-                    style: "margin: 0; color: var(--text-primary);",
-                    "OpenAI API Key:"
-                }
+        //         h4 {
+        //             style: "margin: 0; color: var(--text-primary);",
+        //             "OpenAI API Key:"
+        //         }
                 
-                if keys_exist().0 {
-                    div {
-                        style: "display: flex; align-items: center; gap: 12px;",
-                        span {
-                            style: "color: var(--text-secondary);",
-                            "API key is configured"
-                        }
-                        button {
-                            style: "padding: 6px 12px; background: transparent; color: var(--text-error);
-                                   border: 1px solid var(--text-error); border-radius: 4px; cursor: pointer;",
-                            onclick: move |_| {
-                                let (_, anthropic, google) = keys_exist();
-                                keys_exist.set((false, anthropic, google));
-                            },
-                            "Replace"
-                        }
-                    }
-                } else {
-                    input {
-                        r#type: "password",
-                        placeholder: "Enter your OpenAI API key",
-                        style: "padding: 12px; border: 1px solid var(--ui); border-radius: 6px; 
-                               background: var(--bg-primary); color: var(--text-primary); font-size: 14px;",
-                        value: "{openai_key}",
-                        oninput: move |e| openai_key.set(e.value())
-                    }
-                }
-            }
+        //         if keys_exist().0 {
+        //             div {
+        //                 style: "display: flex; align-items: center; gap: 12px;",
+        //                 span {
+        //                     style: "color: var(--text-secondary);",
+        //                     "API key is configured"
+        //                 }
+        //                 button {
+        //                     style: "padding: 6px 12px; background: transparent; color: var(--text-error);
+        //                            border: 1px solid var(--text-error); border-radius: 4px; cursor: pointer;",
+        //                     onclick: move |_| {
+        //                         let (_, anthropic, google) = keys_exist();
+        //                         keys_exist.set((false, anthropic, google));
+        //                     },
+        //                     "Replace"
+        //                 }
+        //             }
+        //         } else {
+        //             input {
+        //                 r#type: "password",
+        //                 placeholder: "Enter your OpenAI API key",
+        //                 style: "padding: 12px; border: 1px solid var(--ui); border-radius: 6px; 
+        //                        background: var(--bg-primary); color: var(--text-primary); font-size: 14px;",
+        //                 value: "{openai_key}",
+        //                 oninput: move |e| openai_key.set(e.value())
+        //             }
+        //         }
+        //     }
             
             div {
                 style: "display: flex; flex-direction: column; gap: 12px;",
@@ -181,42 +181,42 @@ fn ApiKeysSection() -> Element {
                 }
             }
             
-            div {
-                style: "display: flex; flex-direction: column; gap: 12px;",
+            // div {
+            //     style: "display: flex; flex-direction: column; gap: 12px;",
                 
-                h4 {
-                    style: "margin: 0; color: var(--text-primary);",
-                    "Google API Key:"
-                }
+            //     h4 {
+            //         style: "margin: 0; color: var(--text-primary);",
+            //         "Google API Key:"
+            //     }
                 
-                if keys_exist().2 {
-                    div {
-                        style: "display: flex; align-items: center; gap: 12px;",
-                        span {
-                            style: "color: var(--text-secondary);",
-                            "API key is configured"
-                        }
-                        button {
-                            style: "padding: 6px 12px; background: transparent; color: var(--text-error);
-                                   border: 1px solid var(--text-error); border-radius: 4px; cursor: pointer;",
-                            onclick: move |_| {
-                                let (openai, anthropic, _) = keys_exist();
-                                keys_exist.set((openai, anthropic, false));
-                            },
-                            "Replace"
-                        }
-                    }
-                } else {
-                    input {
-                        r#type: "password",
-                        placeholder: "Enter your Google API key",
-                        style: "padding: 12px; border: 1px solid var(--ui); border-radius: 6px; 
-                               background: var(--bg-primary); color: var(--text-primary); font-size: 14px;",
-                        value: "{google_key}",
-                        oninput: move |e| google_key.set(e.value())
-                    }
-                }
-            }
+            //     if keys_exist().2 {
+            //         div {
+            //             style: "display: flex; align-items: center; gap: 12px;",
+            //             span {
+            //                 style: "color: var(--text-secondary);",
+            //                 "API key is configured"
+            //             }
+            //             button {
+            //                 style: "padding: 6px 12px; background: transparent; color: var(--text-error);
+            //                        border: 1px solid var(--text-error); border-radius: 4px; cursor: pointer;",
+            //                 onclick: move |_| {
+            //                     let (openai, anthropic, _) = keys_exist();
+            //                     keys_exist.set((openai, anthropic, false));
+            //                 },
+            //                 "Replace"
+            //             }
+            //         }
+            //     } else {
+            //         input {
+            //             r#type: "password",
+            //             placeholder: "Enter your Google API key",
+            //             style: "padding: 12px; border: 1px solid var(--ui); border-radius: 6px; 
+            //                    background: var(--bg-primary); color: var(--text-primary); font-size: 14px;",
+            //             value: "{google_key}",
+            //             oninput: move |e| google_key.set(e.value())
+            //         }
+            //     }
+            // }
             
             button {
                 style: "padding: 12px 24px; background: var(--ui); color: var(--text-primary);

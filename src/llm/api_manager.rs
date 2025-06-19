@@ -19,7 +19,7 @@ impl ApiManager {
         })
     }
     
-    pub fn save_openai_key(&self, key: &str) -> Result<()> {
+    pub fn _save_openai_key(&self, key: &str) -> Result<()> {
         self.openai_entry.set_password(key)
             .context("Failed to save OpenAI API key")
     }
@@ -39,7 +39,7 @@ impl ApiManager {
             .context("Failed to retrieve Anthropic API key")
     }
     
-    pub fn save_google_key(&self, key: &str) -> Result<()> {
+    pub fn _save_google_key(&self, key: &str) -> Result<()> {
         self.google_entry.set_password(key)
             .context("Failed to save Google API key")
     }

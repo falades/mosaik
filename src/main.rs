@@ -164,12 +164,12 @@ fn Toolbar(
                 "Save"
             }
             
-            button {
-                class: "load-button", 
-                style: "padding: 8px 16px; background: transparent; color: var(--text-primary); 
-                    border: none; cursor: pointer;",
-                "Load"
-            }
+            // button {
+            //     class: "load-button", 
+            //     style: "padding: 8px 16px; background: transparent; color: var(--text-primary); 
+            //         border: none; cursor: pointer;",
+            //     "Load"
+            // }
             
             button {
                 class: "settings-button",
