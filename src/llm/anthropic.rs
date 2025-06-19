@@ -42,11 +42,16 @@ impl LLMProvider for AnthropicClient {
             _ => None
         };
         
+        let max_tokens = if model == "claude-3-5-haiku-20241022" {
+            8192
+        } else {
+            32000
+        };
         let request = LLMRequest {
             model,
             messages,
             stream: true,
-            max_tokens: Some(32000),
+            max_tokens: Some(max_tokens),
             think: None,
             thinking: thinking_config
         };
