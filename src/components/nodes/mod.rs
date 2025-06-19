@@ -101,7 +101,7 @@ impl Node {
             ),
             NodeType::Model { provider, .. } => {
                 let (title, model_name) = match provider {
-                    ProviderType::Ollama => ("Ollama", "qwen3:1.7b"),
+                    ProviderType::Ollama => ("Ollama", ""),
                     ProviderType::Anthropic => ("Anthropic", "claude-sonnet-4-20250514"),
                 };
                 

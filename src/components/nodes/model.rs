@@ -37,7 +37,7 @@ pub fn ModelNode(
             let models = match provider_clone {
                 ProviderType::Ollama => {
                     let client = OllamaClient::new();
-                    client.get_available_models().await.unwrap_or_else(|_| vec!["qwen3:1.7b".to_string()])
+                    client.get_available_models().await.unwrap_or_else(|_| vec!["".to_string()])
                 },
                 ProviderType::Anthropic => {
                     if api_manager.get_anthropic_key().is_err() {

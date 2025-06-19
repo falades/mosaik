@@ -24,7 +24,7 @@ impl LLMProvider for OllamaClient {
         Self {
             client: reqwest::Client::new(),
             base_url: "http://localhost:11434".to_string(),
-            default_model: "qwen3:1.7b".to_string()
+            default_model: "".to_string()
         }
     }
 
